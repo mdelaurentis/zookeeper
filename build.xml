@@ -23,6 +23,24 @@ xmlns:artifact="antlib:org.apache.maven.artifact.ant"
 xmlns:maven="antlib:org.apache.maven.artifact.ant"
 xmlns:cs="antlib:com.puppycrawl.tools.checkstyle.ant">
 
+
+  <property environment="env"/>
+
+  <property name="checkerframework" value="${env.CHECKERFRAMEWORK}" />
+
+  <!-- On Mac/Linux, use the javac shell script; on Windows, use javac.bat -->
+  <condition property="cfJavac" value="javac.bat" else="javac">
+      <os family="windows" />
+  </condition>
+
+  <presetdef name="jsr308.javac">
+    <javac fork="yes" executable="${checkerframework}/checker/bin/${cfJavac}" >
+      <!-- JSR-308-related compiler arguments -->
+      <compilerarg value="-version"/>
+      <compilerarg value="-implicit:class"/>
+    </javac>
+  </presetdef>
+  
     <!-- read build.properties from the basedir if any -->
     <property file="${basedir}/build.properties" />
     <property name="Name" value="ZooKeeper" />
@@ -438,12 +456,12 @@ xmlns:cs="antlib:com.puppycrawl.tools.checkstyle.ant">
       <ivy:cachepath pathid="mvn-ant-task-classpath" conf="mvn-ant-task"/>
     </target>
     <target name="compile" depends="ivy-retrieve,clover,build-generated">
-        <javac srcdir="${java.src.dir}" destdir="${build.classes}" includeantruntime="false"
+        <jsr308.javac srcdir="${java.src.dir}" destdir="${build.classes}" includeantruntime="false"
                target="${javac.target}" source="${javac.source}" debug="on" encoding="${build.encoding}">
             <classpath refid="java.classpath"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-Xlint:-path"/>
-        </javac>
+        </jsr308.javac>
     </target>
 
     <target name="compile-test" depends="ivy-retrieve-test,compile">
@@ -1956,4 +1974,6 @@ xmlns:cs="antlib:com.puppycrawl.tools.checkstyle.ant">
        <delete dir="${build.dir.eclipse}" />
      </target>
 
+
+     
 </project>
