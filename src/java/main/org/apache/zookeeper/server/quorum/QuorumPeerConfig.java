@@ -577,7 +577,7 @@ public class QuorumPeerConfig {
     }
 
     private void setupMyId() throws IOException {
-        File myIdFile = new File(dataDir, "myid");
+        @RegularFile File myIdFile = new @RegularFile File(dataDir, "myid");
         // standalone server doesn't need myid file.
         if (!myIdFile.isFile()) {
             return;

@@ -85,8 +85,8 @@ public class FileTxnSnapLog {
     public FileTxnSnapLog(File dataDir, File snapDir) throws IOException {
         LOG.debug("Opening datadir:{} snapDir:{}", dataDir, snapDir);
 
-        this.dataDir = (@Directory File) new File(dataDir, version + VERSION);
-        this.snapDir = (@Directory File) new File(snapDir, version + VERSION);
+        this.dataDir = new @Directory File(dataDir, version + VERSION);
+        this.snapDir = new @Directory File(snapDir, version + VERSION);
 
         // by default create snap/log dirs, but otherwise complain instead
         // See ZOOKEEPER-1161 for more details

@@ -34,6 +34,9 @@ import org.apache.jute.InputArchive;
 import org.apache.zookeeper.data.StatPersisted;
 import org.apache.zookeeper.server.persistence.FileSnap;
 
+import java.io.File;
+import com.mdelaurentis.classes.programverification.hw1.*;
+
 /**
  * Dump a snapshot file to stdout.
  */
@@ -56,8 +59,10 @@ public class SnapshotFormatter {
                 new BufferedInputStream(new FileInputStream(snapshotFileName)),
                 new Adler32());
         InputArchive ia = BinaryInputArchive.getArchive(is);
-        
-        FileSnap fileSnap = new FileSnap(null);
+
+        // This seems like a flaw in the design of FileSnap. This
+        // constructs an instance of FileSnap with a null "snapDir".
+        FileSnap fileSnap = new FileSnap((@Directory File)null);
 
         DataTree dataTree = new DataTree();
         Map<Long, Integer> sessions = new HashMap<Long, Integer>();

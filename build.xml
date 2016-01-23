@@ -496,9 +496,11 @@ xmlns:cs="antlib:com.puppycrawl.tools.checkstyle.ant">
                debug="on" encoding="${build.encoding}">
           <compilerarg line="-processor
                              org.checkerframework.common.subtyping.SubtypingChecker
-                             -Aquals=com.mdelaurentis.classes.programverification.hw1.Directory,com.mdelaurentis.classes.programverification.hw1.FileSystemObject,com.mdelaurentis.classes.programverification.hw1.RegularFile
-                             -Astubs=/Users/mikedelaurentis/code/classes/pv/hw1/File.astub"/>
-            <classpath refid="checker.classpath"/>
+                             -Aquals=com.mdelaurentis.classes.programverification.hw1.Directory,com.mdelaurentis.classes.programverification.hw1.FileSystemObject,com.mdelaurentis.classes.programverification.hw1.RegularFile"/>
+                             
+          <compilerarg value="-Astubs=/Users/mikedelaurentis/code/classes/pv/hw1/stubs/"/>
+          <classpath refid="checker.classpath"/>
+          
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-Xlint:-path"/>
         </jsr308.javac>

@@ -64,6 +64,8 @@ import org.apache.zookeeper.server.util.ZxidUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mdelaurentis.classes.programverification.hw1.*;
+
 /**
  * This class manages the quorum protocol. There are three states this server
  * can be in:
@@ -1661,7 +1663,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         return qcm;
     }
     private long readLongFromFile(String name) throws IOException {
-        File file = new File(logFactory.getSnapDir(), name);
+        @RegularFile File file = new @RegularFile File(logFactory.getSnapDir(), name);
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line = "";
         try {
