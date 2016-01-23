@@ -42,6 +42,8 @@ import org.slf4j.LoggerFactory;
 import org.apache.zookeeper.server.DataTree;
 import org.apache.zookeeper.server.util.SerializeUtils;
 
+import com.mdelaurentis.classes.programverification.hw1.*;
+
 /**
  * This class implements the snapshot interface.
  * it is responsible for storing, serializing
@@ -49,14 +51,14 @@ import org.apache.zookeeper.server.util.SerializeUtils;
  * and provides access to the snapshots.
  */
 public class FileSnap implements SnapShot {
-    File snapDir;
+    @Directory File snapDir;
     private volatile boolean close = false;
     private static final int VERSION=2;
     private static final long dbId=-1;
     private static final Logger LOG = LoggerFactory.getLogger(FileSnap.class);
     public final static int SNAP_MAGIC
         = ByteBuffer.wrap("ZKSN".getBytes()).getInt();
-    public FileSnap(File snapDir) {
+    public FileSnap(@Directory File snapDir) {
         this.snapDir = snapDir;
     }
 

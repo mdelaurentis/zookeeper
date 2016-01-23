@@ -29,6 +29,8 @@ import java.util.List;
 import org.apache.zookeeper.server.persistence.FileTxnSnapLog;
 import org.apache.zookeeper.server.persistence.Util;
 
+import com.mdelaurentis.classes.programverification.hw1.*;
+
 /**
  * this class is used to clean up the 
  * snapshot and data log dir's. This is usually

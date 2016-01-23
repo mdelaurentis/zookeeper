@@ -37,6 +37,8 @@ import java.util.Set;
 
 import javax.security.sasl.SaslException;
 
+import com.mdelaurentis.classes.programverification.hw1.*;
+
 import org.apache.jute.BinaryInputArchive;
 import org.apache.jute.BinaryOutputArchive;
 import org.apache.jute.Record;
@@ -312,6 +314,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         if (zkDb == null) {
             return 0L;
         }
+        // It's nice that annotating snapLog.getDataDir allowed it to infer this type
         File path = zkDb.snapLog.getDataDir();
         return getDirSize(path);
     }
@@ -328,7 +331,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     private long getDirSize(File file) {
         long size = 0L;
         if (file.isDirectory()) {
-            for (File f: file.listFiles()) {
+            for (File f: ((@Directory File)file).listFiles()) {
                 size += getDirSize(f);
             }
         } else {

@@ -52,6 +52,7 @@ import org.apache.zookeeper.server.quorum.flexible.QuorumMaj;
 import org.apache.zookeeper.server.quorum.flexible.QuorumVerifier;
 import org.apache.zookeeper.server.util.VerifyingFileFactory;
 
+import com.mdelaurentis.classes.programverification.hw1.*;
 
 public class QuorumPeerConfig {
     private static final Logger LOG = LoggerFactory.getLogger(QuorumPeerConfig.class);
@@ -62,8 +63,8 @@ public class QuorumPeerConfig {
 
     protected InetSocketAddress clientPortAddress;
     protected InetSocketAddress secureClientPortAddress;
-    protected File dataDir;
-    protected File dataLogDir;
+    protected @Directory File dataDir;
+    protected @Directory File dataLogDir;
     protected String dynamicConfigFileStr = null;
     protected String configFileStr = null;
     protected int tickTime = ZooKeeperServer.DEFAULT_TICK_TIME;
@@ -224,9 +225,9 @@ public class QuorumPeerConfig {
             String key = entry.getKey().toString().trim();
             String value = entry.getValue().toString().trim();
             if (key.equals("dataDir")) {
-                dataDir = vff.create(value);
+                dataDir = (@Directory File) vff.create(value);
             } else if (key.equals("dataLogDir")) {
-                dataLogDir = vff.create(value);
+                dataLogDir = (@Directory File) vff.create(value);
             } else if (key.equals("clientPort")) {
                 clientPort = Integer.parseInt(value);
             } else if (key.equals("localSessionsEnabled")) {
@@ -643,8 +644,8 @@ public class QuorumPeerConfig {
 
     public InetSocketAddress getClientPortAddress() { return clientPortAddress; }
     public InetSocketAddress getSecureClientPortAddress() { return secureClientPortAddress; }
-    public File getDataDir() { return dataDir; }
-    public File getDataLogDir() { return dataLogDir; }
+    public @Directory File getDataDir() { return dataDir; }
+    public @Directory File getDataLogDir() { return dataLogDir; }
     public int getTickTime() { return tickTime; }
     public int getMaxClientCnxns() { return maxClientCnxns; }
     public int getMinSessionTimeout() { return minSessionTimeout; }

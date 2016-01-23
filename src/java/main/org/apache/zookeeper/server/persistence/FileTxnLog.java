@@ -46,6 +46,8 @@ import org.apache.zookeeper.txn.TxnHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mdelaurentis.classes.programverification.hw1.*;
+
 /**
  * This class implements the TxnLog interface. It provides api's
  * to access the txnlogs and add entries to it.
@@ -120,7 +122,7 @@ public class FileTxnLog implements TxnLog {
     volatile OutputArchive oa;
     volatile FileOutputStream fos = null;
 
-    File logDir;
+    @Directory File logDir;
     private final boolean forceSync = !System.getProperty("zookeeper.forceSync", "yes").equals("no");;
     long dbId;
     private LinkedList<FileOutputStream> streamsToFlush =
@@ -133,7 +135,7 @@ public class FileTxnLog implements TxnLog {
      * where the txnlogs are stored
      * @param logDir the directory where the txnlogs are stored
      */
-    public FileTxnLog(File logDir) {
+    public FileTxnLog(@Directory File logDir) {
         this.logDir = logDir;
     }
 
@@ -516,7 +518,7 @@ public class FileTxnLog implements TxnLog {
      * which is used for reading the transaction logs
      */
     public static class FileTxnIterator implements TxnLog.TxnIterator {
-        File logDir;
+        @Directory File logDir;
         long zxid;
         TxnHeader hdr;
         Record record;
@@ -539,7 +541,7 @@ public class FileTxnLog implements TxnLog {
          *        a given zxid
          * @throws IOException
          */
-        public FileTxnIterator(File logDir, long zxid, boolean fastForward)
+        public FileTxnIterator(@Directory File logDir, long zxid, boolean fastForward)
                 throws IOException {
             this.logDir = logDir;
             this.zxid = zxid;
@@ -559,7 +561,7 @@ public class FileTxnLog implements TxnLog {
          * @param zxid the zxid to start reading from
          * @throws IOException
          */
-        public FileTxnIterator(File logDir, long zxid) throws IOException {
+        public FileTxnIterator(@Directory File logDir, long zxid) throws IOException {
             this(logDir, zxid, true);
         }
 

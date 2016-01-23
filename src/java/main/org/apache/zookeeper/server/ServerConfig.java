@@ -24,7 +24,7 @@ import java.util.Arrays;
 
 import org.apache.zookeeper.server.quorum.QuorumPeerConfig;
 import org.apache.zookeeper.server.quorum.QuorumPeerConfig.ConfigException;
-
+import com.mdelaurentis.classes.programverification.hw1.*;
 /**
  * Server configuration storage.
  *
@@ -38,8 +38,8 @@ public class ServerConfig {
     ////
     protected InetSocketAddress clientPortAddress;
     protected InetSocketAddress secureClientPortAddress;
-    protected File dataDir;
-    protected File dataLogDir;
+    protected @Directory File dataDir;
+    protected @Directory File dataLogDir;
     protected int tickTime = ZooKeeperServer.DEFAULT_TICK_TIME;
     protected int maxClientCnxns;
     /** defaults to -1 if not set explicitly */
@@ -60,7 +60,7 @@ public class ServerConfig {
         }
 
         clientPortAddress = new InetSocketAddress(Integer.parseInt(args[0]));
-        dataDir = new File(args[1]);
+        dataDir = new @Directory File(args[1]);
         dataLogDir = dataDir;
         if (args.length == 3) {
             tickTime = Integer.parseInt(args[2]);
@@ -106,8 +106,10 @@ public class ServerConfig {
     public InetSocketAddress getSecureClientPortAddress() {
         return secureClientPortAddress;
     }
-    public File getDataDir() { return dataDir; }
-    public File getDataLogDir() { return dataLogDir; }
+
+    // Adding these annotations should fix a bunch of things
+    public @Directory File getDataDir() { return dataDir; }
+    public @Directory File getDataLogDir() { return dataLogDir; }
     public int getTickTime() { return tickTime; }
     public int getMaxClientCnxns() { return maxClientCnxns; }
     /** minimum session timeout in milliseconds, -1 if unset */

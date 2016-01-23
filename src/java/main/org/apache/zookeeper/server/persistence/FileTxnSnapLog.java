@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.mdelaurentis.classes.programverification.hw1.*;
+
 import org.apache.jute.Record;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.KeeperException.Code;
@@ -47,10 +49,10 @@ import org.slf4j.LoggerFactory;
 public class FileTxnSnapLog {
     //the direcotry containing the
     //the transaction logs
-    private final File dataDir;
+    private final @Directory File dataDir;
     //the directory containing the
     //the snapshot directory
-    private final File snapDir;
+    private final @Directory File snapDir;
     private TxnLog txnLog;
     private SnapShot snapLog;
     public final static int VERSION = 2;
@@ -83,8 +85,8 @@ public class FileTxnSnapLog {
     public FileTxnSnapLog(File dataDir, File snapDir) throws IOException {
         LOG.debug("Opening datadir:{} snapDir:{}", dataDir, snapDir);
 
-        this.dataDir = new File(dataDir, version + VERSION);
-        this.snapDir = new File(snapDir, version + VERSION);
+        this.dataDir = (@Directory File) new File(dataDir, version + VERSION);
+        this.snapDir = (@Directory File) new File(snapDir, version + VERSION);
 
         // by default create snap/log dirs, but otherwise complain instead
         // See ZOOKEEPER-1161 for more details
@@ -131,7 +133,7 @@ public class FileTxnSnapLog {
      * snap log
      * @return the data dir
      */
-    public File getDataDir() {
+    public @Directory File getDataDir() {
         return this.dataDir;
     }
 
@@ -140,7 +142,7 @@ public class FileTxnSnapLog {
      * filetxn snap log
      * @return the snap dir
      */
-    public File getSnapDir() {
+    public @Directory File getSnapDir() {
         return this.snapDir;
     }
 
