@@ -253,6 +253,28 @@ xmlns:cs="antlib:com.puppycrawl.tools.checkstyle.ant">
       <pathelement path="${clover.jar}" />
     </path>
 
+    <!-- the checkrer classpath -->
+    <path id="checker.classpath">
+      <pathelement location="${build.classes}"/>
+      <!-- allow the user to override (e.g. if there are local versions) -->
+      <fileset dir="${additional.lib.dir}">
+        <include name="${additional.lib.dir.includes}" />
+        <exclude name="${additional.lib.dir.excludes}" />
+      </fileset>
+      <fileset dir="${lib.dir}">
+        <include name="${lib.dir.includes}" />
+        <exclude name="${lib.dir.excludes}" />
+      </fileset>
+      <fileset dir="${ant.home}/lib">
+        <include name="ant.jar" />
+      </fileset>
+      <fileset dir="${ivy.lib}">
+        <include name="**/*.jar" />
+      </fileset>
+      <pathelement path="${clover.jar}" />
+      <pathelement path="/Users/mikedelaurentis/code/classes/pv/hw1/src" />
+    </path>    
+
     <path id="test.java.classpath">
       <pathelement location="${test.java.classes}" />
       <fileset dir="${ivy.test.lib}">
@@ -456,13 +478,31 @@ xmlns:cs="antlib:com.puppycrawl.tools.checkstyle.ant">
       <ivy:cachepath pathid="mvn-ant-task-classpath" conf="mvn-ant-task"/>
     </target>
     <target name="compile" depends="ivy-retrieve,clover,build-generated">
-        <jsr308.javac srcdir="${java.src.dir}" destdir="${build.classes}" includeantruntime="false"
+        <javac srcdir="${java.src.dir}" destdir="${build.classes}" includeantruntime="false"
                target="${javac.target}" source="${javac.source}" debug="on" encoding="${build.encoding}">
             <classpath refid="java.classpath"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-Xlint:-path"/>
-        </jsr308.javac>
+        </javac>
     </target>
+
+    <target
+        name="check-file-system-objects"
+        depends="ivy-retrieve,clover,build-generated"
+        description="Check for files treated as directories and
+                     directories treated as files">
+        <jsr308.javac srcdir="${java.src.dir}" destdir="${build.classes}" includeantruntime="false"
+               target="${javac.target}" source="${javac.source}"
+               debug="on" encoding="${build.encoding}">
+          <compilerarg line="-processor
+                             org.checkerframework.common.subtyping.SubtypingChecker
+                             -Aquals=com.mdelaurentis.classes.programverification.hw1.Directory,com.mdelaurentis.classes.programverification.hw1.FileSystemObject,com.mdelaurentis.classes.programverification.hw1.RegularFile
+                             -Astubs=/Users/mikedelaurentis/code/classes/pv/hw1/File.astub"/>
+            <classpath refid="checker.classpath"/>
+            <compilerarg value="-Xlint:all"/>
+            <compilerarg value="-Xlint:-path"/>
+        </jsr308.javac>
+    </target>    
 
     <target name="compile-test" depends="ivy-retrieve-test,compile">
       <mkdir dir="${test.java.classes}"/>
