@@ -37,8 +37,6 @@ import java.util.Set;
 
 import javax.security.sasl.SaslException;
 
-import com.mdelaurentis.classes.programverification.hw1.*;
-
 import org.apache.jute.BinaryInputArchive;
 import org.apache.jute.BinaryOutputArchive;
 import org.apache.jute.Record;
@@ -72,6 +70,7 @@ import org.apache.zookeeper.txn.TxnHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mdelaurentis.typequalifiers.file.*;
 
 /**
  * This class implements a simple standalone ZooKeeperServer. It sets up the

@@ -64,7 +64,7 @@ import org.apache.zookeeper.server.util.ZxidUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mdelaurentis.classes.programverification.hw1.*;
+import com.mdelaurentis.typequalifiers.file.*;
 
 /**
  * This class manages the quorum protocol. There are three states this server

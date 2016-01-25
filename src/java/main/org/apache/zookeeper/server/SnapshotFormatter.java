@@ -35,7 +35,8 @@ import org.apache.zookeeper.data.StatPersisted;
 import org.apache.zookeeper.server.persistence.FileSnap;
 
 import java.io.File;
-import com.mdelaurentis.classes.programverification.hw1.*;
+
+import com.mdelaurentis.typequalifiers.file.*;
 
 /**
  * Dump a snapshot file to stdout.

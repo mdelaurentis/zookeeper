@@ -22,7 +22,7 @@ import java.io.File;
 
 import org.slf4j.Logger;
 
-import com.mdelaurentis.classes.programverification.hw1.*;
+import com.mdelaurentis.typequalifiers.file.*;
 
 public final class VerifyingFileFactory {
 

@@ -29,7 +29,7 @@ import java.util.List;
 import org.apache.zookeeper.server.persistence.FileTxnSnapLog;
 import org.apache.zookeeper.server.persistence.Util;
 
-import com.mdelaurentis.classes.programverification.hw1.*;
+import com.mdelaurentis.typequalifiers.file.*;
 
 /**
  * this class is used to clean up the 

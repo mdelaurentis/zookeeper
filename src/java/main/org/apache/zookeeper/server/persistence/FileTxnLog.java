@@ -46,7 +46,7 @@ import org.apache.zookeeper.txn.TxnHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mdelaurentis.classes.programverification.hw1.*;
+import com.mdelaurentis.typequalifiers.file.*;
 
 /**
  * This class implements the TxnLog interface. It provides api's

@@ -24,7 +24,9 @@ import java.util.Arrays;
 
 import org.apache.zookeeper.server.quorum.QuorumPeerConfig;
 import org.apache.zookeeper.server.quorum.QuorumPeerConfig.ConfigException;
-import com.mdelaurentis.classes.programverification.hw1.*;
+
+import com.mdelaurentis.typequalifiers.file.*;
+
 /**
  * Server configuration storage.
  *
