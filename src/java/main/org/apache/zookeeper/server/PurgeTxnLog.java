@@ -29,8 +29,6 @@ import java.util.List;
 import org.apache.zookeeper.server.persistence.FileTxnSnapLog;
 import org.apache.zookeeper.server.persistence.Util;
 
-import com.mdelaurentis.typequalifiers.file.*;
-
 /**
  * this class is used to clean up the 
  * snapshot and data log dir's. This is usually
